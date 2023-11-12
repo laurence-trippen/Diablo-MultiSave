@@ -9,9 +9,9 @@ namespace Diablo_MultiSave.Core
     /// </summary>
     internal class SaveFileWatcher
     {
-        public SaveFileWatcher(string diabloPath)
+        public SaveFileWatcher(string saveFilePath)
         {
-            using (var fileWatcher = new FileSystemWatcher(diabloPath))
+            using (var fileWatcher = new FileSystemWatcher(saveFilePath))
             {
 
             }

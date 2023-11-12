@@ -15,6 +15,7 @@ namespace Diablo_MultiSave
     public partial class MainForm : Form
     {
         private ToolStripStatusLabel statusLabel = null;
+        private SaveFileManager saveFileManager = null;
 
         public MainForm()
         {
@@ -30,8 +31,10 @@ namespace Diablo_MultiSave
             if (savedPath != null && File.Exists(savedPath))
             {
                 statusLabel.Text = $"Found path: {savedPath}";
+                saveFileManager = new SaveFileManager(savedPath);
                 return;
             }
+
 
             string diabloPath = DiabloPath.TryFindPath();
 
@@ -60,6 +63,8 @@ namespace Diablo_MultiSave
                     Properties.Settings.Default.Save();
 
                     statusLabel.Text = $"Set Path: ${fileDialog.FileName}";
+
+                    saveFileManager = new SaveFileManager(fileDialog.FileName);
                 }
                 else
                 {
@@ -68,10 +73,6 @@ namespace Diablo_MultiSave
                     Application.Exit();
                 }
             }
-
-            // var saveFileWatcher = new SaveFileWatcher(diabloPath);
-
-            Console.WriteLine(diabloPath);
         }
     }
 }
